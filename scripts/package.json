@@ -1,0 +1,15 @@
+{
+  "name": "firebase-seed-scripts",
+  "version": "1.0.0",
+  "description": "Scripts to seed Firebase Firestore with sample data",
+  "main": "seed-data.js",
+  "scripts": {
+    "seed": "node seed-data.js"
+  },
+  "dependencies": {
+    "firebase": "^10.7.0"
+  },
+  "keywords": ["firebase", "firestore", "seed", "data"],
+  "author": "",
+  "license": "MIT"
+} 

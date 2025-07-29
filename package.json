@@ -9,7 +9,10 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "deploy": "npm run build:prod && firebase deploy",
-    "serve:ssr:yelp-rating-app": "node dist/yelp-rating-app/server/server.mjs"
+    "serve:ssr:yelp-rating-app": "node dist/yelp-rating-app/server/server.mjs",
+    "setup:firebase": "node scripts/setup-firebase.js",
+    "seed:data": "cd scripts && npm run seed",
+    "get:config": "node scripts/get-firebase-config.js"
   },
   "prettier": {
     "overrides": [
