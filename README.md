@@ -4,10 +4,10 @@ A modern, responsive restaurant rating application built with Angular 17 and Fir
 
 🌐 **Live Demo**: [https://fir-practice-54eb3.web.app/](https://fir-practice-54eb3.web.app/)
 
-![FoodRater App](https://img.shields.io/badge/Angular-17-red?style=for-the-badge&logo=angular)
+![Angular](https://img.shields.io/badge/Angular-17-red?style=for-the-badge&logo=angular)
 ![Firebase](https://img.shields.io/badge/Firebase-Cloud-orange?style=for-the-badge&logo=firebase)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=for-the-badge&logo=typescript)
-![Security](https://img.shields.io/badge/Security-Audited-green?style=for-the-badge&logo=shield)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-38B2AC?style=for-the-badge&logo=tailwind-css)
 
 ## ✨ Features
 
@@ -15,24 +15,22 @@ A modern, responsive restaurant rating application built with Angular 17 and Fir
 - Browse and search restaurants by cuisine, location, and price range
 - Advanced filtering and sorting options
 - Real-time search with debounced input
-- Responsive grid layout for all devices
+- Responsive grid and list layouts
 
 ### ⭐ **Rating System**
 - 5-star rating system with half-star support
 - Detailed review system with comments
-- Helpful vote system for reviews
 - Average rating calculations and statistics
 
 ### 🔐 **User Authentication**
 - Secure login/signup with Firebase Authentication
 - User profile management
 - Protected routes and data access
-- Session management and security
 
 ### 📱 **Modern UI/UX**
 - Responsive design for desktop, tablet, and mobile
 - Beautiful gradient design with smooth animations
-- Intuitive navigation and user experience
+- Material Design components with Tailwind CSS
 - Loading states and error handling
 
 ### 🔥 **Firebase Integration**
@@ -45,10 +43,9 @@ A modern, responsive restaurant rating application built with Angular 17 and Fir
 
 - **Frontend**: Angular 17 (Standalone Components)
 - **Backend**: Firebase (Firestore, Authentication, Hosting)
-- **Styling**: SCSS with modern CSS Grid and Flexbox
+- **Styling**: Tailwind CSS + Angular Material
 - **State Management**: RxJS Observables
-- **Security**: Comprehensive security measures and validation
-- **Deployment**: Firebase Hosting (Static Site)
+- **Deployment**: Firebase Hosting
 
 ## 🚀 Quick Start
 
@@ -56,7 +53,6 @@ A modern, responsive restaurant rating application built with Angular 17 and Fir
 - Node.js (v18 or higher)
 - npm or yarn
 - Firebase account
-- Angular CLI
 
 ### 1. Clone and Install
 ```bash
@@ -65,7 +61,7 @@ cd firebase-practice
 npm install
 ```
 
-### 2. Set up Firebase (Interactive)
+### 2. Set up Firebase
 ```bash
 npm run setup:firebase
 ```
@@ -75,7 +71,7 @@ This interactive script will guide you through Firebase configuration.
 ```bash
 npm run seed:data
 ```
-This adds 10 restaurants with 30 reviews to your database.
+This adds sample restaurants with reviews to your database.
 
 ### 4. Start Development
 ```bash
@@ -116,6 +112,7 @@ src/
 │   │   ├── restaurants/ # Restaurant listing with filters
 │   │   ├── auth/        # Authentication pages
 │   │   ├── add-restaurant/ # Add restaurant form
+│   │   ├── bulk-add-restaurants/ # Bulk restaurant addition
 │   │   └── restaurant-detail/ # Restaurant detail page
 │   ├── services/        # Firebase services
 │   ├── shared/          # Shared components
@@ -137,19 +134,11 @@ scripts/                 # Utility scripts
 - **Firebase Authentication**: Secure email/password authentication
 - **User-Specific Access**: Users can only modify their own data
 - **Role-Based Permissions**: Different access levels for authenticated vs anonymous users
-- **Session Management**: Automatic session handling with Firebase Auth
 
 ### Data Protection
 - **Secure Firestore Rules**: Comprehensive validation and access control
 - **Input Validation**: Client and server-side validation
 - **XSS Protection**: Angular's built-in sanitization
-- **CSRF Protection**: Firebase's built-in protection
-
-### Web Security Headers
-- **Content Security Policy**: Restricts script execution
-- **X-Frame-Options**: Prevents clickjacking
-- **X-XSS-Protection**: Enables XSS filtering
-- **Referrer-Policy**: Controls referrer information
 
 ### Security Tools
 - **Automated Security Audit**: `npm run security:audit`
@@ -158,15 +147,15 @@ scripts/                 # Utility scripts
 
 ## 🌱 Sample Data
 
-The app includes 10 sample restaurants with realistic data:
+The app includes sample restaurants with realistic data:
 
 ### Restaurants
 - 🍕 **Pizza Palace** - Italian, Moderate pricing
 - 🍣 **Sushi Express** - Japanese, Expensive pricing  
-- 🍔 **Burger Barn** - American, Budget pricing
+- 🍔 **Burger Joint** - American, Budget pricing
 - 🌮 **Taco Fiesta** - Mexican, Budget pricing
 - 🥢 **Golden Dragon** - Chinese, Moderate pricing
-- 🍷 **Le Bistro** - French, Luxury pricing
+- 🍷 **French Bistro** - French, Luxury pricing
 - 🌶️ **Spice Garden** - Indian, Moderate pricing
 - 🍝 **Pasta House** - Italian, Moderate pricing
 - 🥩 **Steak House** - American, Expensive pricing
@@ -177,7 +166,6 @@ The app includes 10 sample restaurants with realistic data:
 - Operating hours for each day
 - Price ranges (Budget/Moderate/Expensive/Luxury)
 - Restaurant features (Delivery, Takeout, etc.)
-- High-quality food images from Unsplash
 - Sample reviews with ratings and comments
 
 ## 🔧 Firebase Configuration
@@ -198,42 +186,6 @@ export const environment = {
     appId: "your-app-id"
   }
 };
-```
-
-### Firestore Security Rules
-```javascript
-rules_version = '2';
-service cloud.firestore {
-  match /databases/{database}/documents {
-    // Helper functions
-    function isAuthenticated() {
-      return request.auth != null;
-    }
-    
-    function isOwner(userId) {
-      return isAuthenticated() && request.auth.uid == userId;
-    }
-    
-    // Restaurant rules
-    match /restaurants/{restaurantId} {
-      allow read: if true;
-      allow write: if isAuthenticated();
-    }
-    
-    // Review rules
-    match /reviews/{reviewId} {
-      allow read: if true;
-      allow create: if isAuthenticated();
-      allow update, delete: if isAuthenticated() && 
-        request.auth.uid == resource.data.userId;
-    }
-    
-    // User profile rules
-    match /users/{userId} {
-      allow read, write: if isOwner(userId);
-    }
-  }
-}
 ```
 
 ## 🚀 Deployment
@@ -259,9 +211,6 @@ npm run security:deploy-rules
 ```bash
 # Run security audit
 npm run security:audit
-
-# Test search functionality
-cd scripts && node quick-search-test.js
 ```
 
 ### Manual Testing Checklist
@@ -295,12 +244,6 @@ cd scripts && node quick-search-test.js
 - Check authentication configuration
 - Verify Firebase project settings
 
-### Getting Help
-1. Check browser console for error messages
-2. Verify Firebase configuration
-3. Review security rules
-4. Check the troubleshooting guides
-
 ## 📊 Performance
 
 - **Optimized Bundle Size**: Efficient code splitting
@@ -315,21 +258,8 @@ cd scripts && node quick-search-test.js
 - **Typography**: Clean, readable fonts
 - **Layout**: Card-based design with proper spacing
 - **Animations**: Smooth hover effects and transitions
-- **Icons**: Emoji-based icons for better visual appeal
+- **Icons**: Material Design icons for better visual appeal
 - **Responsive**: Mobile-first design approach
-
-## 🔄 Maintenance
-
-### Regular Updates
-- **Monthly**: Security audit and dependency updates
-- **Quarterly**: Security rule review and updates
-- **Annually**: Comprehensive security assessment
-
-### Security Monitoring
-- Automated security audits
-- Dependency vulnerability scanning
-- Firebase Analytics for error tracking
-- Firestore access logging
 
 ## 🤝 Contributing
 
@@ -349,19 +279,10 @@ If you encounter any issues or have questions:
 1. Check the existing issues
 2. Create a new issue with detailed information
 3. Contact the maintainers
-4. Review the troubleshooting guides
-
-## 🙏 Acknowledgments
-
-- Inspired by Yelp's restaurant rating system
-- Built with modern web technologies
-- Designed for optimal user experience
-- Comprehensive security implementation
 
 ---
 
 **Built with ❤️ using Angular 17 and Firebase**
 
 **Last Updated**: December 2024  
-**Version**: 1.0  
-**Maintainer**: Development Team
+**Version**: 1.0

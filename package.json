@@ -11,7 +11,7 @@
     "deploy": "npm run build:prod && firebase deploy",
     "serve:ssr:yelp-rating-app": "node dist/yelp-rating-app/server/server.mjs",
     "setup:firebase": "node scripts/setup-firebase.js",
-    "seed:data": "cd scripts && npm run seed",
+    "seed:data": "cd scripts && node seed-data.js",
     "get:config": "node scripts/get-firebase-config.js",
     "security:audit": "node scripts/security-audit.js",
     "security:cleanup": "node scripts/code-cleanup.js",
