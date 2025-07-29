@@ -63,22 +63,6 @@ import { FormsModule } from '@angular/forms';
             Find the best places to eat, read authentic reviews, and share your dining experiences with our community
           </p>
           
-          <!-- Tech Stack Badges -->
-          <div class="flex flex-wrap justify-center gap-3 mb-6 sm:mb-8">
-            <span class="bg-white/20 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-medium border border-white/30">
-              Angular 17
-            </span>
-            <span class="bg-white/20 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-medium border border-white/30">
-              TypeScript
-            </span>
-            <span class="bg-white/20 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-medium border border-white/30">
-              SQL
-            </span>
-            <span class="bg-white/20 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-medium border border-white/30">
-              Tailwind CSS
-            </span>
-          </div>
-          
           <!-- Search Bar -->
           <div class="max-w-2xl mx-auto px-4">
             <mat-form-field appearance="outline" class="w-full hero-search">

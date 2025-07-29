@@ -1,12 +1,12 @@
 # 🍽️ FoodRater - Restaurant Rating App
 
-A modern, responsive restaurant rating application built with Angular 17 and SQL, inspired by Yelp. Users can discover restaurants, read reviews, and share their dining experiences with a beautiful, intuitive interface.
+A modern, responsive restaurant rating application built with Angular 17 and Firebase, inspired by Yelp. Users can discover restaurants, read reviews, and share their dining experiences with a beautiful, intuitive interface.
 
 🌐 **Live Demo**: [https://firebase-practice--fir-practice-54eb3.us-central1.hosted.app/](https://firebase-practice--fir-practice-54eb3.us-central1.hosted.app/)
 
 ![Angular](https://img.shields.io/badge/Angular-17-red?style=for-the-badge&logo=angular)
+![Firebase](https://img.shields.io/badge/Firebase-Cloud-orange?style=for-the-badge&logo=firebase)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=for-the-badge&logo=typescript)
-![SQL](https://img.shields.io/badge/SQL-Database-4479A1?style=for-the-badge&logo=mysql)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-38B2AC?style=for-the-badge&logo=tailwind-css)
 
 ## ✨ Features
@@ -42,10 +42,10 @@ A modern, responsive restaurant rating application built with Angular 17 and SQL
 ## 🛠️ Tech Stack
 
 - **Frontend**: Angular 17 (Standalone Components)
-- **Backend**: SQL Database
+- **Backend**: Firebase (Firestore, Authentication, Hosting)
 - **Styling**: Tailwind CSS + Angular Material
 - **State Management**: RxJS Observables
-- **Deployment**: Static Hosting
+- **Deployment**: Firebase Hosting
 
 ## 🚀 Quick Start
 
