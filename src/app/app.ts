@@ -50,10 +50,23 @@ import { map, shareReplay } from 'rxjs/operators';
       <mat-toolbar class="bg-white border-b border-gray-200">
         <div class="flex justify-between items-center w-full px-2 sm:px-4">
           <div class="flex items-center space-x-2 sm:space-x-3">
-            <mat-icon class="text-primary-600 text-lg sm:text-xl">restaurant</mat-icon>
-            <span class="text-lg sm:text-xl font-semibold text-gray-800">FoodRater</span>
+            <button mat-button routerLink="/" class="flex items-center space-x-2 text-gray-800 hover:text-primary-700 transition-colors">
+              <mat-icon class="text-primary-600 text-lg sm:text-xl">restaurant</mat-icon>
+              <span class="text-lg sm:text-xl font-semibold">FoodRater</span>
+            </button>
           </div>
           <div class="flex items-center space-x-1 sm:space-x-2">
+            <!-- Navigation buttons -->
+            <button mat-button routerLink="/" class="hidden sm:flex items-center">
+              <mat-icon class="mr-1">home</mat-icon>
+              Home
+            </button>
+            <button mat-button routerLink="/restaurants" class="hidden sm:flex items-center">
+              <mat-icon class="mr-1">restaurant_menu</mat-icon>
+              Restaurants
+            </button>
+            
+            <!-- Auth buttons -->
             <button mat-button routerLink="/login" class="hidden sm:flex">Login</button>
             <button mat-raised-button color="primary" routerLink="/signup" class="text-sm sm:text-base px-2 sm:px-4">Sign Up</button>
           </div>
@@ -84,7 +97,7 @@ import { map, shareReplay } from 'rxjs/operators';
               </mat-card-content>
             </mat-card>
             
-            <mat-card class="cursor-pointer hover:shadow-lg transition-shadow duration-300 sm:col-span-2 lg:col-span-1" routerLink="/login">
+            <mat-card class="cursor-pointer hover:shadow-lg transition-shadow duration-300 sm:col-span-2 lg:col-span-1" routerLink="/restaurants">
               <mat-card-content class="p-4 sm:p-6 text-center">
                 <mat-icon class="text-3xl sm:text-4xl text-primary-600 mb-3 sm:mb-4">rate_review</mat-icon>
                 <h3 class="text-lg sm:text-xl font-semibold mb-2">Rate & Review</h3>
@@ -109,23 +122,11 @@ export class AppComponent {
 
   constructor() {
     console.log('AppComponent initialized');
-    console.log('Background should be gray now');
-    
-    // Add error handling for unhandled errors
-    window.addEventListener('error', (event) => {
-      console.error('Global error caught:', event.error);
-      this.snackBar.open('An error occurred. Please refresh the page.', 'Close', {
-        duration: 5000,
-        horizontalPosition: 'center',
-        verticalPosition: 'bottom',
-        panelClass: ['error-state']
-      });
-    });
     
     // Simulate loading time and hide loading screen
     setTimeout(() => {
       this.isLoading = false;
-    }, 2000);
+    }, 1000);
   }
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)

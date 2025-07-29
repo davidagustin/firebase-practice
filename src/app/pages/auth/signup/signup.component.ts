@@ -46,6 +46,14 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 
         <!-- Signup Form -->
         <mat-card class="p-8 shadow-large">
+          <!-- Back to Home Link -->
+          <div class="mb-6">
+            <button type="button" mat-button routerLink="/" class="text-gray-600 hover:text-primary-700">
+              <mat-icon class="mr-2">arrow_back</mat-icon>
+              Back to Home
+            </button>
+          </div>
+          
           <form (ngSubmit)="onSignup()" class="space-y-6">
             <mat-form-field appearance="outline" class="w-full">
               <mat-label>Email Address</mat-label>
@@ -137,7 +145,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
           <div class="text-center">
             <p class="text-gray-600">
               Already have an account? 
-              <a routerLink="/auth/login" 
+              <a routerLink="/login" 
                  class="text-primary-600 hover:text-primary-700 font-medium transition-colors">
                 Sign in
               </a>

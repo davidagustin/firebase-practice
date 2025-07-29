@@ -53,6 +53,14 @@ import { AuthService } from '../../services/auth.service';
 
         <!-- Form Card -->
         <mat-card class="p-8 shadow-large">
+          <!-- Back to Restaurants Link -->
+          <div class="mb-6">
+            <button type="button" mat-button routerLink="/restaurants" class="text-gray-600 hover:text-primary-700">
+              <mat-icon class="mr-2">arrow_back</mat-icon>
+              Back to Restaurants
+            </button>
+          </div>
+          
           <form (ngSubmit)="onSubmit()" class="space-y-8">
             <!-- Basic Information -->
             <div>
@@ -155,7 +163,7 @@ import { AuthService } from '../../services/auth.service';
                 <p class="text-sm font-medium text-gray-700 mb-2">Selected features:</p>
                 <div class="flex flex-wrap gap-2">
                   <mat-chip *ngFor="let feature of restaurant.features" 
-                           class="text-xs bg-primary-100 text-primary-800">
+                           class="text-xs bg-primary-600 text-white font-medium shadow-sm">
                     {{ feature }}
                   </mat-chip>
                 </div>

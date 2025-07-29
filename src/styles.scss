@@ -22,6 +22,260 @@
   color: rgba(0, 0, 0, 0.87) !important;
 }
 
+/* Form field styles */
+.mat-mdc-form-field {
+  width: 100% !important;
+}
+
+.mat-mdc-form-field .mat-mdc-form-field-flex {
+  background-color: white !important;
+  border-radius: 8px !important;
+}
+
+.mat-mdc-form-field .mat-mdc-text-field-wrapper {
+  background-color: white !important;
+  border-radius: 8px !important;
+}
+
+/* Remove all outline borders and vertical lines */
+.mat-mdc-form-field.mat-mdc-form-field-appearance-outline .mat-mdc-form-field-outline {
+  color: #e0e0e0 !important;
+}
+
+.mat-mdc-form-field.mat-mdc-form-field-appearance-outline .mat-mdc-form-field-outline-thick {
+  color: #3f51b5 !important;
+}
+
+/* Ensure no internal borders create vertical lines */
+.mat-mdc-form-field .mat-mdc-form-field-infix {
+  border: none !important;
+  border-top: none !important;
+  border-bottom: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  padding: 0 !important;
+}
+
+.mat-mdc-form-field .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex {
+  border: none !important;
+  border-top: none !important;
+  border-bottom: none !important;
+  border-left: none !important;
+  border-right: none !important;
+}
+
+.mat-mdc-form-field.mat-mdc-form-field-appearance-outline .mat-mdc-form-field-wrapper {
+  margin: 0 !important;
+}
+
+.mat-mdc-form-field.mat-mdc-form-field-appearance-outline .mat-mdc-form-field-outline {
+  color: #e0e0e0 !important;
+}
+
+.mat-mdc-form-field.mat-mdc-form-field-appearance-outline .mat-mdc-form-field-outline-thick {
+  color: #3f51b5 !important;
+}
+
+.mat-mdc-form-field .mat-mdc-form-field-label {
+  color: rgba(0, 0, 0, 0.6) !important;
+}
+
+.mat-mdc-form-field .mat-mdc-input-element {
+  color: rgba(0, 0, 0, 0.87) !important;
+}
+
+/* Select dropdown styles */
+.mat-mdc-select {
+  color: rgba(0, 0, 0, 0.87) !important;
+}
+
+.mat-mdc-select-value {
+  color: rgba(0, 0, 0, 0.87) !important;
+}
+
+.mat-mdc-select-arrow {
+  color: rgba(0, 0, 0, 0.54) !important;
+}
+
+/* Input placeholder styles */
+.mat-mdc-form-field .mat-mdc-input-element::placeholder {
+  color: rgba(0, 0, 0, 0.38) !important;
+}
+
+/* Focus states */
+.mat-mdc-form-field.mat-focused .mat-mdc-form-field-outline-thick {
+  color: #3f51b5 !important;
+}
+
+.mat-mdc-form-field.mat-focused .mat-mdc-form-field-label {
+  color: #3f51b5 !important;
+}
+
+/* Hero section form field overrides */
+.hero-search .mat-mdc-form-field {
+  background-color: white !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+}
+
+.hero-search .mat-mdc-form-field .mat-mdc-form-field-flex {
+  background-color: white !important;
+  border-radius: 12px !important;
+}
+
+.hero-search .mat-mdc-form-field .mat-mdc-text-field-wrapper {
+  background-color: white !important;
+  border-radius: 12px !important;
+}
+
+.hero-search .mat-mdc-form-field.mat-mdc-form-field-appearance-outline .mat-mdc-form-field-outline {
+  color: transparent !important;
+  border: none !important;
+}
+
+.hero-search .mat-mdc-form-field.mat-mdc-form-field-appearance-outline .mat-mdc-form-field-outline-thick {
+  color: transparent !important;
+  border: none !important;
+}
+
+.hero-search .mat-mdc-form-field.mat-mdc-form-field-appearance-outline .mat-mdc-form-field-outline-start,
+.hero-search .mat-mdc-form-field.mat-mdc-form-field-appearance-outline .mat-mdc-form-field-outline-end,
+.hero-search .mat-mdc-form-field.mat-mdc-form-field-appearance-outline .mat-mdc-form-field-outline-gap {
+  border: none !important;
+  border-color: transparent !important;
+}
+
+.hero-search .mat-mdc-form-field .mat-mdc-form-field-label {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.hero-search .mat-mdc-form-field.mat-focused .mat-mdc-form-field-label {
+  color: white !important;
+}
+
+/* Remove any internal borders or dividers */
+.hero-search .mat-mdc-form-field .mat-mdc-form-field-infix {
+  border: none !important;
+  padding: 0 !important;
+}
+
+.hero-search .mat-mdc-form-field .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex {
+  border: none !important;
+}
+
+.hero-search .mat-mdc-form-field .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-infix {
+  border: none !important;
+  padding: 0 !important;
+}
+
+/* Global form field vertical line removal */
+.mat-mdc-form-field.mat-mdc-form-field-appearance-outline .mat-mdc-form-field-outline-start,
+.mat-mdc-form-field.mat-mdc-form-field-appearance-outline .mat-mdc-form-field-outline-end,
+.mat-mdc-form-field.mat-mdc-form-field-appearance-outline .mat-mdc-form-field-outline-gap {
+  border: none !important;
+  border-color: transparent !important;
+}
+
+.mat-mdc-form-field .mat-mdc-form-field-infix {
+  border: none !important;
+  padding: 0 !important;
+}
+
+.mat-mdc-form-field .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex {
+  border: none !important;
+}
+
+.mat-mdc-form-field .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-infix {
+  border: none !important;
+  padding: 0 !important;
+}
+
+/* Remove any internal dividers or separators */
+.mat-mdc-form-field .mat-mdc-form-field-subscript-wrapper {
+  border: none !important;
+}
+
+.mat-mdc-form-field .mat-mdc-form-field-hint-wrapper {
+  border: none !important;
+}
+
+/* Chip styling overrides */
+.mat-mdc-chip {
+  background-color: var(--mdc-chip-elevated-container-color, #1976d2) !important;
+  color: var(--mdc-chip-elevated-label-text-color, white) !important;
+  border: none !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+.mat-mdc-chip.mat-mdc-chip-selected {
+  background-color: var(--mdc-chip-elevated-selected-container-color, #1565c0) !important;
+}
+
+/* Specific chip color overrides */
+.mat-mdc-chip.bg-primary-600 {
+  background-color: #1976d2 !important;
+  color: white !important;
+}
+
+.mat-mdc-chip.bg-accent-600 {
+  background-color: #ff9800 !important;
+  color: white !important;
+}
+
+.mat-mdc-chip.bg-green-600 {
+  background-color: #4caf50 !important;
+  color: white !important;
+}
+
+/* Force override any remaining transparent chips */
+.mat-mdc-chip[class*="bg-primary-100"] {
+  background-color: #1976d2 !important;
+  color: white !important;
+  font-weight: 500 !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+.mat-mdc-chip[class*="bg-accent-100"] {
+  background-color: #ff9800 !important;
+  color: white !important;
+  font-weight: 500 !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+.mat-mdc-chip[class*="bg-green-100"] {
+  background-color: #4caf50 !important;
+  color: white !important;
+  font-weight: 500 !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Override Material Design's default chip styles completely */
+.mat-mdc-chip.mat-mdc-chip-action {
+  background-color: #1976d2 !important;
+  color: white !important;
+  border: none !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+.mat-mdc-chip.mat-mdc-chip-action .mdc-elevated-action-chip__graphic {
+  color: white !important;
+}
+
+.mat-mdc-chip.mat-mdc-chip-action .mdc-elevated-action-chip__label {
+  color: white !important;
+  font-weight: 500 !important;
+}
+
+/* Ensure chip text is visible */
+.mat-mdc-chip .mdc-elevated-surface {
+  background-color: inherit !important;
+}
+
+.mat-mdc-chip .mdc-chip__text-label {
+  color: inherit !important;
+  font-weight: 500 !important;
+}
+
 /* Tailwind CSS */
 @tailwind base;
 @tailwind components;

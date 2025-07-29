@@ -54,20 +54,22 @@ import { FormsModule } from '@angular/forms';
           <p class="text-lg text-gray-600 mb-8 max-w-2xl">Discover amazing places to eat in your area</p>
           
           <!-- Search and Filters -->
-          <div class="flex flex-col gap-6">
+          <div class="space-y-6">
             <!-- Search Bar -->
-            <mat-form-field appearance="outline" class="w-full max-w-2xl">
-              <mat-label>Search restaurants...</mat-label>
-              <input 
-                matInput 
-                [(ngModel)]="searchTerm" 
-                placeholder="Name, cuisine, or location"
-                (input)="onSearchTermChange($event.target.value)">
-              <mat-icon matSuffix class="text-gray-500">search</mat-icon>
-            </mat-form-field>
+            <div class="flex justify-center">
+              <mat-form-field appearance="outline" class="w-full max-w-2xl">
+                <mat-label>Search restaurants...</mat-label>
+                <input 
+                  matInput 
+                  [(ngModel)]="searchTerm" 
+                  placeholder="Name, cuisine, or location"
+                  (input)="onSearchTermChange($event.target.value)">
+                <mat-icon matSuffix class="text-gray-500">search</mat-icon>
+              </mat-form-field>
+            </div>
             
             <!-- Filters Row -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl mx-auto">
               <mat-form-field appearance="outline" class="w-full">
                 <mat-label>Cuisine</mat-label>
                 <mat-select [(ngModel)]="selectedCuisine" (selectionChange)="onCuisineChange($event.value)">
@@ -98,22 +100,25 @@ import { FormsModule } from '@angular/forms';
                   <mat-option value="price">Price (Low to High)</mat-option>
                 </mat-select>
               </mat-form-field>
-              
-              <div class="flex items-center gap-2">
+            </div>
+            
+            <!-- View Toggle -->
+            <div class="flex justify-center">
+              <div class="flex items-center gap-2 bg-white rounded-lg p-1 shadow-sm">
                 <button mat-icon-button 
-                        [class.bg-primary-50]="viewMode === 'grid'" 
+                        [class.bg-primary-200]="viewMode === 'grid'" 
                         [class.text-primary-700]="viewMode === 'grid'" 
                         (click)="viewMode = 'grid'"
                         matTooltip="Grid view"
-                        class="hover:bg-gray-100">
+                        class="hover:bg-gray-100 rounded-md">
                   <mat-icon>grid_view</mat-icon>
                 </button>
                 <button mat-icon-button 
-                        [class.bg-primary-50]="viewMode === 'list'" 
+                        [class.bg-primary-200]="viewMode === 'list'" 
                         [class.text-primary-700]="viewMode === 'list'" 
                         (click)="viewMode = 'list'"
                         matTooltip="List view"
-                        class="hover:bg-gray-100">
+                        class="hover:bg-gray-100 rounded-md">
                   <mat-icon>view_list</mat-icon>
                 </button>
               </div>
@@ -133,15 +138,15 @@ import { FormsModule } from '@angular/forms';
           <div class="flex flex-wrap gap-2 mt-2" *ngIf="searchTerm || selectedCuisine || selectedPriceRange">
             <span class="text-sm text-gray-600">Filtered by:</span>
             <span *ngIf="searchTerm" 
-                  class="bg-primary-100 text-primary-800 px-3 py-1 rounded-full text-sm font-medium">
+                  class="bg-primary-600 text-white px-3 py-1 rounded-full text-sm font-medium shadow-sm">
               {{ searchTerm }}
             </span>
             <span *ngIf="selectedCuisine" 
-                  class="bg-accent-100 text-accent-800 px-3 py-1 rounded-full text-sm font-medium">
+                  class="bg-accent-600 text-white px-3 py-1 rounded-full text-sm font-medium shadow-sm">
               {{ selectedCuisine }}
             </span>
             <span *ngIf="selectedPriceRange" 
-                  class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
+                  class="bg-green-600 text-white px-3 py-1 rounded-full text-sm font-medium shadow-sm">
               {{ selectedPriceRange }}
             </span>
           </div>
@@ -204,10 +209,10 @@ import { FormsModule } from '@angular/forms';
             <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
             <div class="absolute top-3 right-3">
               <div class="flex gap-1">
-                <mat-chip class="text-xs bg-primary-100 text-primary-800">
+                <mat-chip class="text-xs bg-primary-600 text-white font-medium shadow-sm">
                   {{ restaurant.cuisine }}
                 </mat-chip>
-                <mat-chip class="text-xs bg-accent-100 text-accent-800">
+                <mat-chip class="text-xs bg-accent-600 text-white font-medium shadow-sm">
                   {{ restaurant.priceRange }}
                 </mat-chip>
               </div>
@@ -308,8 +313,8 @@ import { FormsModule } from '@angular/forms';
               </div>
               
               <div class="flex flex-wrap gap-2">
-                <mat-chip class="text-xs bg-primary-50 text-primary-800 border border-primary-200">{{ restaurant.cuisine }}</mat-chip>
-                <mat-chip class="text-xs bg-accent-50 text-accent-800 border border-accent-200">{{ restaurant.priceRange }}</mat-chip>
+                <mat-chip class="text-xs bg-primary-600 text-white font-medium shadow-sm">{{ restaurant.cuisine }}</mat-chip>
+                <mat-chip class="text-xs bg-accent-600 text-white font-medium shadow-sm">{{ restaurant.priceRange }}</mat-chip>
                 <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded-full text-xs font-medium" 
                       *ngFor="let feature of restaurant.features?.slice(0, 2)">
                   {{ feature }}
@@ -370,6 +375,9 @@ export class RestaurantsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    // Setup the filtered restaurants observable
+    this.setupFilteredRestaurants();
+    
     this.route.queryParams.pipe(
       takeUntil(this.destroy$)
     ).subscribe(params => {

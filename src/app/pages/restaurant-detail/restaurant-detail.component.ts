@@ -35,6 +35,13 @@ import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
   template: `
     <div class="max-w-6xl mx-auto py-8 px-4 sm:px-6 lg:px-8" *ngIf="restaurant$ | async as restaurant; else loading">
       <div class="animate-fade-in">
+        <!-- Back Navigation -->
+        <div class="mb-6">
+          <button mat-button routerLink="/restaurants" class="text-gray-600 hover:text-primary-700">
+            <mat-icon class="mr-2">arrow_back</mat-icon>
+            Back to Restaurants
+          </button>
+        </div>
         <!-- Restaurant Header -->
         <div class="relative bg-gradient-to-br from-primary-600 via-primary-700 to-primary-800 text-white rounded-2xl overflow-hidden mb-8">
           <div class="absolute inset-0 bg-black/20"></div>
@@ -53,7 +60,7 @@ import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
                 </div>
                 
                 <div class="flex flex-wrap items-center gap-4">
-                  <mat-chip class="text-lg bg-accent-100 text-accent-800">
+                  <mat-chip class="text-lg bg-accent-600 text-white font-medium shadow-sm">
                     {{ restaurant.priceRange }}
                   </mat-chip>
                   <div class="flex items-center gap-2 opacity-90">
@@ -134,7 +141,7 @@ import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
               
               <div class="flex flex-wrap gap-2">
                 <mat-chip *ngFor="let feature of restaurant.features" 
-                         class="text-sm bg-primary-100 text-primary-800">
+                         class="text-sm bg-primary-600 text-white font-medium shadow-sm">
                   {{ feature }}
                 </mat-chip>
               </div>

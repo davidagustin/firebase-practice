@@ -65,24 +65,24 @@ import { FormsModule } from '@angular/forms';
           
           <!-- Search Bar -->
           <div class="max-w-2xl mx-auto px-4">
-            <mat-form-field appearance="outline" class="w-full">
-              <mat-label class="text-gray-600">Search restaurants...</mat-label>
+            <mat-form-field appearance="outline" class="w-full hero-search">
+              <mat-label class="text-white">Search restaurants...</mat-label>
               <input 
                 matInput 
                 [(ngModel)]="searchTerm" 
                 placeholder="Name, cuisine, or location"
                 (keyup.enter)="onSearch()"
                 (keyup)="onSearchInput()"
-                class="text-gray-900"
+                class="text-gray-900 bg-white"
                 aria-label="Search restaurants">
-              <mat-icon matSuffix class="text-gray-600">search</mat-icon>
+              <mat-icon matSuffix class="text-gray-500">search</mat-icon>
               <button 
                 matSuffix 
                 mat-icon-button 
                 (click)="onSearch()"
                 [disabled]="!searchTerm.trim()"
                 matTooltip="Search restaurants"
-                class="text-primary-600">
+                class="text-primary-600 hover:text-primary-700">
                 <mat-icon>arrow_forward</mat-icon>
               </button>
             </mat-form-field>
@@ -113,10 +113,10 @@ import { FormsModule } from '@angular/forms';
             <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
             <div class="absolute top-3 right-3">
               <div class="flex gap-1">
-                <mat-chip class="text-xs bg-primary-100 text-primary-800">
+                <mat-chip class="text-xs bg-primary-600 text-white font-medium shadow-sm">
                   {{ restaurant.cuisine }}
                 </mat-chip>
-                <mat-chip class="text-xs bg-accent-100 text-accent-800">
+                <mat-chip class="text-xs bg-accent-600 text-white font-medium shadow-sm">
                   {{ restaurant.priceRange }}
                 </mat-chip>
               </div>
