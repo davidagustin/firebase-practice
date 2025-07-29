@@ -1,0 +1,32 @@
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="nav-brand">
+      <h1>🍽️ FoodRater</h1>
+    </div>
+    <div class="nav-menu">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link">Home</a>
+      <a routerLink="/restaurants" routerLinkActive="active" class="nav-link">Restaurants</a>
+      <a routerLink="/add-restaurant" routerLinkActive="active" class="nav-link">Add Restaurant</a>
+      <ng-container *ngIf="!(isAuthenticated$ | async); else userMenu">
+        <a routerLink="/login" routerLinkActive="active" class="nav-link">Login</a>
+        <a routerLink="/signup" routerLinkActive="active" class="nav-link">Sign Up</a>
+      </ng-container>
+      <ng-template #userMenu>
+        <div class="user-menu">
+          <span class="user-name">{{ (currentUser$ | async)?.displayName || (currentUser$ | async)?.email }}</span>
+          <button (click)="signOut()" class="signout-btn">Sign Out</button>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</nav>
+
+<main class="main-content">
+  <router-outlet />
+</main>
+
+<footer class="footer">
+  <div class="footer-content">
+    <p>&copy; 2024 FoodRater. Find and rate the best restaurants in your area!</p>
+  </div>
+</footer>
