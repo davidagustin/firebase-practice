@@ -314,7 +314,9 @@ export class HomeComponent implements OnInit {
     { name: 'Indian', icon: 'spice', description: 'Curries, naan, and aromatic spices' }
   ];
 
-  constructor() {
+  constructor() {}
+
+  ngOnInit(): void {
     this.topRestaurants$ = this.restaurantService.getTopRatedRestaurants(6).pipe(
       map(restaurants => this.removeDuplicates(restaurants)),
       catchError(error => {
@@ -329,8 +331,6 @@ export class HomeComponent implements OnInit {
       })
     );
   }
-
-  ngOnInit(): void {}
 
   private removeDuplicates(restaurants: Restaurant[]): Restaurant[] {
     const seen = new Set();

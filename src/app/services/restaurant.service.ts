@@ -237,7 +237,8 @@ export class RestaurantService {
       } as Restaurant))),
       catchError(error => {
         console.error('Error fetching top rated restaurants:', error);
-        return of([]); // Return empty array on error
+        // Return sample data if Firebase fails
+        return of(this.getSampleRestaurants().slice(0, limitCount));
       })
     );
   }
