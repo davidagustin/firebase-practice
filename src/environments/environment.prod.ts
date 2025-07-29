@@ -7,7 +7,7 @@ export const environment = {
     storageBucket: "fir-practice-54eb3.firebasestorage.app",
     messagingSenderId: "872925798496",
     appId: "1:872925798496:web:8cd2dcf4ab6ab2e66ce305"
-  }
+  },
 
   // Production security settings
   enableDebugMode: false,
