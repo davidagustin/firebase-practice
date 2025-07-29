@@ -5,14 +5,14 @@ import { LoginComponent } from './pages/auth/login/login.component';
 import { SignupComponent } from './pages/auth/signup/signup.component';
 import { AddRestaurantComponent } from './pages/add-restaurant/add-restaurant.component';
 import { RestaurantDetailComponent } from './pages/restaurant-detail/restaurant-detail.component';
-import { BulkAddRestaurantsComponent } from './pages/bulk-add-restaurants/bulk-add-restaurants.component';
+
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'restaurants', component: RestaurantsComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'add-restaurant', component: AddRestaurantComponent },
-  { path: 'bulk-add-restaurants', component: BulkAddRestaurantsComponent },
+
   { path: 'restaurant/:id', component: RestaurantDetailComponent },
   { path: 'profile', component: HomeComponent }, // TODO: Create ProfileComponent
   { path: 'favorites', component: HomeComponent }, // TODO: Create FavoritesComponent

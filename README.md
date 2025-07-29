@@ -112,7 +112,6 @@ src/
 │   │   ├── restaurants/ # Restaurant listing with filters
 │   │   ├── auth/        # Authentication pages
 │   │   ├── add-restaurant/ # Add restaurant form
-│   │   ├── bulk-add-restaurants/ # Bulk restaurant addition
 │   │   └── restaurant-detail/ # Restaurant detail page
 │   ├── services/        # Firebase services
 │   ├── shared/          # Shared components
