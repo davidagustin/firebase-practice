@@ -202,8 +202,8 @@ import { FormsModule } from '@angular/forms';
                   matRipple>
           <mat-card-content class="p-8">
             <div class="mb-6">
-              <div class="w-16 h-16 bg-gradient-to-br from-primary-100 to-primary-200 rounded-2xl flex items-center justify-center mx-auto group-hover:from-primary-200 group-hover:to-primary-300 transition-all duration-300">
-                <mat-icon class="text-3xl text-primary-700">{{ category.icon }}</mat-icon>
+              <div class="w-20 h-20 bg-gradient-to-br from-primary-100 to-primary-200 rounded-2xl flex items-center justify-center mx-auto group-hover:from-primary-200 group-hover:to-primary-300 transition-all duration-300">
+                <mat-icon class="text-2xl text-primary-700">{{ category.icon }}</mat-icon>
               </div>
             </div>
             <h3 class="text-xl font-semibold mb-3 text-gray-900 group-hover:text-primary-700 transition-colors">
@@ -227,8 +227,8 @@ import { FormsModule } from '@angular/forms';
           <div class="absolute -top-5 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-gradient-to-br from-primary-600 to-primary-700 text-white rounded-full flex items-center justify-center font-bold text-lg shadow-lg">
             1
           </div>
-          <div class="w-16 h-16 bg-gradient-to-br from-primary-100 to-primary-200 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:from-primary-200 group-hover:to-primary-300 transition-all duration-300">
-            <mat-icon class="text-3xl text-primary-700">search</mat-icon>
+          <div class="w-20 h-20 bg-gradient-to-br from-primary-100 to-primary-200 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:from-primary-200 group-hover:to-primary-300 transition-all duration-300">
+            <mat-icon class="text-2xl text-primary-700">search</mat-icon>
           </div>
           <h3 class="text-xl font-semibold mb-3 text-gray-900">Search</h3>
           <p class="text-gray-600 leading-relaxed">Find restaurants by name, cuisine, or location</p>
@@ -238,8 +238,8 @@ import { FormsModule } from '@angular/forms';
           <div class="absolute -top-5 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-gradient-to-br from-primary-600 to-primary-700 text-white rounded-full flex items-center justify-center font-bold text-lg shadow-lg">
             2
           </div>
-          <div class="w-16 h-16 bg-gradient-to-br from-primary-100 to-primary-200 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:from-primary-200 group-hover:to-primary-300 transition-all duration-300">
-            <mat-icon class="text-3xl text-primary-700">rate_review</mat-icon>
+          <div class="w-20 h-20 bg-gradient-to-br from-primary-100 to-primary-200 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:from-primary-200 group-hover:to-primary-300 transition-all duration-300">
+            <mat-icon class="text-2xl text-primary-700">rate_review</mat-icon>
           </div>
           <h3 class="text-xl font-semibold mb-3 text-gray-900">Rate & Review</h3>
           <p class="text-gray-600 leading-relaxed">Share your dining experience with ratings and reviews</p>
@@ -249,8 +249,8 @@ import { FormsModule } from '@angular/forms';
           <div class="absolute -top-5 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-gradient-to-br from-primary-600 to-primary-700 text-white rounded-full flex items-center justify-center font-bold text-lg shadow-lg">
             3
           </div>
-          <div class="w-16 h-16 bg-gradient-to-br from-primary-100 to-primary-200 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:from-primary-200 group-hover:to-primary-300 transition-all duration-300">
-            <mat-icon class="text-3xl text-primary-700">favorite</mat-icon>
+          <div class="w-20 h-20 bg-gradient-to-br from-primary-100 to-primary-200 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:from-primary-200 group-hover:to-primary-300 transition-all duration-300">
+            <mat-icon class="text-2xl text-primary-700">favorite</mat-icon>
           </div>
           <h3 class="text-xl font-semibold mb-3 text-gray-900">Save Favorites</h3>
           <p class="text-gray-600 leading-relaxed">Save your favorite restaurants for quick access</p>
@@ -262,32 +262,32 @@ import { FormsModule } from '@angular/forms';
     <section class="bg-gradient-to-br from-gray-50 to-gray-100 -mx-6 -mb-6 px-6 py-16">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto">
         <div class="text-center group">
-          <div class="w-16 h-16 bg-gradient-to-br from-primary-100 to-primary-200 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:from-primary-200 group-hover:to-primary-300 transition-all duration-300">
-            <mat-icon class="text-3xl text-primary-700">restaurant</mat-icon>
+          <div class="w-20 h-20 bg-gradient-to-br from-primary-100 to-primary-200 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:from-primary-200 group-hover:to-primary-300 transition-all duration-300">
+            <mat-icon class="text-2xl text-primary-700">restaurant</mat-icon>
           </div>
           <h3 class="text-3xl md:text-4xl font-light text-primary-700 mb-2">500+</h3>
           <p class="text-lg text-gray-600">Restaurants</p>
         </div>
         
         <div class="text-center group">
-          <div class="w-16 h-16 bg-gradient-to-br from-primary-100 to-primary-200 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:from-primary-200 group-hover:to-primary-300 transition-all duration-300">
-            <mat-icon class="text-3xl text-primary-700">people</mat-icon>
+          <div class="w-20 h-20 bg-gradient-to-br from-primary-100 to-primary-200 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:from-primary-200 group-hover:to-primary-300 transition-all duration-300">
+            <mat-icon class="text-2xl text-primary-700">people</mat-icon>
           </div>
           <h3 class="text-3xl md:text-4xl font-light text-primary-700 mb-2">10K+</h3>
           <p class="text-lg text-gray-600">Reviews</p>
         </div>
         
         <div class="text-center group">
-          <div class="w-16 h-16 bg-gradient-to-br from-primary-100 to-primary-200 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:from-primary-200 group-hover:to-primary-300 transition-all duration-300">
-            <mat-icon class="text-3xl text-primary-700">star</mat-icon>
+          <div class="w-20 h-20 bg-gradient-to-br from-primary-100 to-primary-200 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:from-primary-200 group-hover:to-primary-300 transition-all duration-300">
+            <mat-icon class="text-2xl text-primary-700">star</mat-icon>
           </div>
           <h3 class="text-3xl md:text-4xl font-light text-primary-700 mb-2">4.5</h3>
           <p class="text-lg text-gray-600">Average Rating</p>
         </div>
         
         <div class="text-center group">
-          <div class="w-16 h-16 bg-gradient-to-br from-primary-100 to-primary-200 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:from-primary-200 group-hover:to-primary-300 transition-all duration-300">
-            <mat-icon class="text-3xl text-primary-700">favorite</mat-icon>
+          <div class="w-20 h-20 bg-gradient-to-br from-primary-100 to-primary-200 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:from-primary-200 group-hover:to-primary-300 transition-all duration-300">
+            <mat-icon class="text-2xl text-primary-700">favorite</mat-icon>
           </div>
           <h3 class="text-3xl md:text-4xl font-light text-primary-700 mb-2">50K+</h3>
           <p class="text-lg text-gray-600">Happy Users</p>

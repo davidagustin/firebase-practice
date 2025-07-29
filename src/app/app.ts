@@ -111,7 +111,7 @@ import { map, shareReplay } from 'rxjs/operators';
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8">
             <mat-card class="cursor-pointer hover:shadow-lg transition-shadow duration-300" routerLink="/restaurants">
               <mat-card-content class="p-4 sm:p-6 text-center">
-                <mat-icon class="text-3xl sm:text-4xl text-primary-600 mb-3 sm:mb-4">restaurant_menu</mat-icon>
+                <mat-icon class="text-2xl sm:text-3xl text-primary-600 mb-3 sm:mb-4">restaurant_menu</mat-icon>
                 <h3 class="text-lg sm:text-xl font-semibold mb-2">Browse Restaurants</h3>
                 <p class="text-sm sm:text-base text-gray-600">Discover amazing places to eat</p>
               </mat-card-content>
@@ -119,7 +119,7 @@ import { map, shareReplay } from 'rxjs/operators';
             
             <mat-card class="cursor-pointer hover:shadow-lg transition-shadow duration-300" routerLink="/add-restaurant">
               <mat-card-content class="p-4 sm:p-6 text-center">
-                <mat-icon class="text-3xl sm:text-4xl text-primary-600 mb-3 sm:mb-4">add_business</mat-icon>
+                <mat-icon class="text-2xl sm:text-3xl text-primary-600 mb-3 sm:mb-4">add_business</mat-icon>
                 <h3 class="text-lg sm:text-xl font-semibold mb-2">Add Restaurant</h3>
                 <p class="text-sm sm:text-base text-gray-600">Share your favorite spots</p>
               </mat-card-content>
@@ -129,7 +129,7 @@ import { map, shareReplay } from 'rxjs/operators';
             
             <mat-card class="cursor-pointer hover:shadow-lg transition-shadow duration-300" routerLink="/restaurants">
               <mat-card-content class="p-4 sm:p-6 text-center">
-                <mat-icon class="text-3xl sm:text-4xl text-primary-600 mb-3 sm:mb-4">rate_review</mat-icon>
+                <mat-icon class="text-2xl sm:text-3xl text-primary-600 mb-3 sm:mb-4">rate_review</mat-icon>
                 <h3 class="text-lg sm:text-xl font-semibold mb-2">Rate & Review</h3>
                 <p class="text-sm sm:text-base text-gray-600">Share your dining experiences</p>
               </mat-card-content>
