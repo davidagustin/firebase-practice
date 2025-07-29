@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { RouterLink, ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { RestaurantService } from '../../services/restaurant.service';
 import { Restaurant } from '../../models/restaurant.model';
 import { RatingComponent } from '../../shared/rating/rating.component';
-import { Observable, combineLatest } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { Observable, combineLatest, BehaviorSubject, Subject } from 'rxjs';
+import { map, startWith, takeUntil, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'app-restaurants',
@@ -24,17 +24,18 @@ import { map, startWith } from 'rxjs/operators';
           type="text" 
           placeholder="Search restaurants..."
           [(ngModel)]="searchTerm"
+          (ngModelChange)="onSearchTermChange($event)"
           class="form-control"
         >
       </div>
       
       <div class="filter-options">
-        <select [(ngModel)]="selectedCuisine" class="form-control">
+        <select [(ngModel)]="selectedCuisine" (ngModelChange)="onCuisineChange($event)" class="form-control">
           <option value="">All Cuisines</option>
           <option *ngFor="let cuisine of cuisines" [value]="cuisine">{{ cuisine }}</option>
         </select>
         
-        <select [(ngModel)]="selectedPriceRange" class="form-control">
+        <select [(ngModel)]="selectedPriceRange" (ngModelChange)="onPriceRangeChange($event)" class="form-control">
           <option value="">All Price Ranges</option>
           <option value="Budget">Budget</option>
           <option value="Moderate">Moderate</option>
@@ -42,7 +43,7 @@ import { map, startWith } from 'rxjs/operators';
           <option value="Luxury">Luxury</option>
         </select>
         
-        <select [(ngModel)]="sortBy" class="form-control">
+        <select [(ngModel)]="sortBy" (ngModelChange)="onSortByChange($event)" class="form-control">
           <option value="rating">Sort by Rating</option>
           <option value="name">Sort by Name</option>
           <option value="reviews">Sort by Reviews</option>
@@ -294,7 +295,7 @@ import { map, startWith } from 'rxjs/operators';
     }
   `]
 })
-export class RestaurantsComponent implements OnInit {
+export class RestaurantsComponent implements OnInit, OnDestroy {
   restaurants$: Observable<Restaurant[]>;
   filteredRestaurants$!: Observable<Restaurant[]>;
   
@@ -303,35 +304,68 @@ export class RestaurantsComponent implements OnInit {
   selectedPriceRange: string = '';
   sortBy: string = 'rating';
   
+  private searchTermSubject = new BehaviorSubject<string>('');
+  private cuisineSubject = new BehaviorSubject<string>('');
+  private priceRangeSubject = new BehaviorSubject<string>('');
+  private sortBySubject = new BehaviorSubject<string>('rating');
+  private destroy$ = new Subject<void>();
+  
   cuisines: string[] = [
     'Italian', 'Asian', 'American', 'Mexican', 'Mediterranean', 
     'Indian', 'French', 'Japanese', 'Chinese', 'Thai', 'Greek'
   ];
 
-  constructor(private restaurantService: RestaurantService) {
+  constructor(
+    private restaurantService: RestaurantService,
+    private route: ActivatedRoute
+  ) {
     this.restaurants$ = this.restaurantService.getRestaurants();
     this.setupFilteredRestaurants();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // Check for search query parameter from home page
+    this.route.queryParams.pipe(
+      takeUntil(this.destroy$)
+    ).subscribe(params => {
+      if (params['search']) {
+        this.searchTerm = params['search'];
+        this.searchTermSubject.next(this.searchTerm);
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 
   private setupFilteredRestaurants(): void {
     this.filteredRestaurants$ = combineLatest([
       this.restaurants$,
-      this.getSearchTerm$(),
-      this.getCuisineFilter$(),
-      this.getPriceRangeFilter$(),
-      this.getSortBy$()
+      this.searchTermSubject.asObservable().pipe(
+        debounceTime(300),
+        distinctUntilChanged()
+      ),
+      this.cuisineSubject.asObservable(),
+      this.priceRangeSubject.asObservable(),
+      this.sortBySubject.asObservable()
     ]).pipe(
       map(([restaurants, searchTerm, cuisine, priceRange, sortBy]) => {
-        let filtered = restaurants;
+        // Remove duplicates by restaurant name to avoid confusion
+        const uniqueRestaurants = this.removeDuplicates(restaurants);
+        let filtered = uniqueRestaurants;
 
         // Apply search filter
         if (searchTerm) {
+          const searchLower = searchTerm.toLowerCase();
           filtered = filtered.filter(restaurant =>
-            restaurant.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            restaurant.cuisine.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            restaurant.address.toLowerCase().includes(searchTerm.toLowerCase())
+            restaurant.name.toLowerCase().includes(searchLower) ||
+            restaurant.cuisine.toLowerCase().includes(searchLower) ||
+            restaurant.address.toLowerCase().includes(searchLower) ||
+            restaurant.features.some(feature => 
+              feature.toLowerCase().includes(searchLower)
+            )
           );
         }
 
@@ -353,29 +387,32 @@ export class RestaurantsComponent implements OnInit {
     );
   }
 
-  private getSearchTerm$() {
-    return new Observable<string>(observer => {
-      observer.next(this.searchTerm);
-      // This is a simplified version - in a real app you'd use proper reactive forms
+  private removeDuplicates(restaurants: Restaurant[]): Restaurant[] {
+    const seen = new Set();
+    return restaurants.filter(restaurant => {
+      const key = restaurant.name.toLowerCase().trim();
+      if (seen.has(key)) {
+        return false;
+      }
+      seen.add(key);
+      return true;
     });
   }
 
-  private getCuisineFilter$() {
-    return new Observable<string>(observer => {
-      observer.next(this.selectedCuisine);
-    });
+  onSearchTermChange(value: string): void {
+    this.searchTermSubject.next(value);
   }
 
-  private getPriceRangeFilter$() {
-    return new Observable<string>(observer => {
-      observer.next(this.selectedPriceRange);
-    });
+  onCuisineChange(value: string): void {
+    this.cuisineSubject.next(value);
   }
 
-  private getSortBy$() {
-    return new Observable<string>(observer => {
-      observer.next(this.sortBy);
-    });
+  onPriceRangeChange(value: string): void {
+    this.priceRangeSubject.next(value);
+  }
+
+  onSortByChange(value: string): void {
+    this.sortBySubject.next(value);
   }
 
   private sortRestaurants(restaurants: Restaurant[], sortBy: string): Restaurant[] {

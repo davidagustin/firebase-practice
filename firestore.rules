@@ -1,0 +1,89 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+    
+    function isValidRestaurant() {
+      return request.resource.data.keys().hasAll(['name', 'cuisine', 'address', 'priceRange']) &&
+             request.resource.data.name is string &&
+             request.resource.data.name.size() > 0 &&
+             request.resource.data.name.size() <= 100 &&
+             request.resource.data.cuisine is string &&
+             request.resource.data.cuisine.size() > 0 &&
+             request.resource.data.cuisine.size() <= 50 &&
+             request.resource.data.address is string &&
+             request.resource.data.address.size() > 0 &&
+             request.resource.data.address.size() <= 200 &&
+             request.resource.data.priceRange in ['Budget', 'Moderate', 'Expensive', 'Luxury'];
+    }
+    
+    function isValidReview() {
+      return request.resource.data.keys().hasAll(['restaurantId', 'rating', 'comment']) &&
+             request.resource.data.restaurantId is string &&
+             request.resource.data.rating is number &&
+             request.resource.data.rating >= 1 &&
+             request.resource.data.rating <= 5 &&
+             request.resource.data.comment is string &&
+             request.resource.data.comment.size() > 0 &&
+             request.resource.data.comment.size() <= 1000;
+    }
+    
+    // Restaurant rules
+    match /restaurants/{restaurantId} {
+      // Anyone can read restaurants
+      allow read: if true;
+      
+      // Only authenticated users can create/update/delete
+      allow create: if isAuthenticated() && isValidRestaurant();
+      allow update: if isAuthenticated() && isValidRestaurant();
+      allow delete: if isAuthenticated();
+    }
+    
+    // Review rules
+    match /reviews/{reviewId} {
+      // Anyone can read reviews
+      allow read: if true;
+      
+      // Only authenticated users can create reviews
+      allow create: if isAuthenticated() && isValidReview();
+      
+      // Only the review author can update/delete their review
+      allow update: if isAuthenticated() && 
+                      request.auth.uid == resource.data.userId && 
+                      isValidReview();
+      allow delete: if isAuthenticated() && 
+                      request.auth.uid == resource.data.userId;
+    }
+    
+    // User profile rules
+    match /users/{userId} {
+      // Users can only read/write their own profile
+      allow read, write: if isOwner(userId);
+    }
+    
+    // Favorites rules
+    match /favorites/{favoriteId} {
+      // Users can only read/write their own favorites
+      allow read, write: if isAuthenticated() && 
+                          request.auth.uid == resource.data.userId;
+    }
+    
+    // Admin rules (if needed)
+    match /admin/{document=**} {
+      // Only allow admin access if you have admin users
+      allow read, write: if false; // Disabled by default
+    }
+    
+    // Deny all other access
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+} 

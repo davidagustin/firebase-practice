@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { RestaurantService } from '../../services/restaurant.service';
 import { Restaurant } from '../../models/restaurant.model';
 import { RatingComponent } from '../../shared/rating/rating.component';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -21,10 +22,10 @@ import { Observable } from 'rxjs';
             type="text" 
             placeholder="Search restaurants, cuisines, or locations..."
             [(ngModel)]="searchTerm"
-            (input)="onSearch()"
+            (keyup.enter)="onSearch()"
             class="search-input"
           >
-          <button class="search-btn">🔍</button>
+          <button class="search-btn" (click)="onSearch()">🔍</button>
         </div>
       </div>
     </div>
@@ -350,14 +351,36 @@ export class HomeComponent implements OnInit {
     { name: 'Desserts', icon: '🍰', description: 'Cakes, ice cream, pastries' }
   ];
 
-  constructor(private restaurantService: RestaurantService) {
-    this.topRestaurants$ = this.restaurantService.getTopRatedRestaurants(6);
+  constructor(
+    private restaurantService: RestaurantService,
+    private router: Router
+  ) {
+    // Get top rated restaurants and remove duplicates
+    this.topRestaurants$ = this.restaurantService.getTopRatedRestaurants(6).pipe(
+      map(restaurants => this.removeDuplicates(restaurants))
+    );
   }
 
   ngOnInit(): void {}
 
+  private removeDuplicates(restaurants: Restaurant[]): Restaurant[] {
+    const seen = new Set();
+    return restaurants.filter(restaurant => {
+      const key = restaurant.name.toLowerCase().trim();
+      if (seen.has(key)) {
+        return false;
+      }
+      seen.add(key);
+      return true;
+    });
+  }
+
   onSearch(): void {
-    // Implement search functionality
-    console.log('Searching for:', this.searchTerm);
+    if (this.searchTerm.trim()) {
+      // Navigate to restaurants page with search term
+      this.router.navigate(['/restaurants'], { 
+        queryParams: { search: this.searchTerm.trim() } 
+      });
+    }
   }
 } 

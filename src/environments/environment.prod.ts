@@ -8,4 +8,10 @@ export const environment = {
     messagingSenderId: "872925798496",
     appId: "1:872925798496:web:8cd2dcf4ab6ab2e66ce305"
   }
+
+  // Production security settings
+  enableDebugMode: false,
+  enableConsoleLogs: false,
+  enableAnalytics: true,
+  strictMode: true,
 }; 

@@ -5,7 +5,6 @@ import { LoginComponent } from './pages/auth/login/login.component';
 import { SignupComponent } from './pages/auth/signup/signup.component';
 import { AddRestaurantComponent } from './pages/add-restaurant/add-restaurant.component';
 import { RestaurantDetailComponent } from './pages/restaurant-detail/restaurant-detail.component';
-
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'restaurants', component: RestaurantsComponent },

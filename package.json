@@ -12,7 +12,10 @@
     "serve:ssr:yelp-rating-app": "node dist/yelp-rating-app/server/server.mjs",
     "setup:firebase": "node scripts/setup-firebase.js",
     "seed:data": "cd scripts && npm run seed",
-    "get:config": "node scripts/get-firebase-config.js"
+    "get:config": "node scripts/get-firebase-config.js",
+    "security:audit": "node scripts/security-audit.js",
+    "security:cleanup": "node scripts/code-cleanup.js",
+    "security:deploy-rules": "firebase deploy --only firestore:rules"
   },
   "prettier": {
     "overrides": [
