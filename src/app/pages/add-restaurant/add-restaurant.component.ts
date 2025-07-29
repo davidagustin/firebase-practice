@@ -1,276 +1,236 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RestaurantService } from '../../services/restaurant.service';
 import { Restaurant } from '../../models/restaurant.model';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatRippleModule } from '@angular/material/core';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-add-restaurant',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [
+    CommonModule, 
+    FormsModule,
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    MatProgressSpinnerModule,
+    MatDividerModule,
+    MatSnackBarModule,
+    MatChipsModule,
+    MatTooltipModule,
+    MatRippleModule
+  ],
   template: `
-    <div class="add-restaurant-container">
-      <div class="add-restaurant-card card">
-        <div class="card-header">
-          <h2>Add New Restaurant</h2>
-          <p>Help others discover great places to eat</p>
+    <div class="max-w-4xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+      <div class="animate-fade-in">
+        <!-- Header -->
+        <div class="text-center mb-8">
+          <div class="w-16 h-16 bg-gradient-to-br from-primary-600 to-primary-700 rounded-2xl flex items-center justify-center mx-auto mb-6">
+            <mat-icon class="text-white text-2xl">add_business</mat-icon>
+          </div>
+          <h1 class="text-3xl md:text-4xl font-light text-gray-900 mb-3">Add New Restaurant</h1>
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto">Help others discover great places to eat by adding a new restaurant to our community</p>
         </div>
 
-        <form (ngSubmit)="onSubmit()" class="restaurant-form">
-          <div class="form-group">
-            <label for="name" class="form-label">Restaurant Name *</label>
-            <input 
-              type="text" 
-              id="name"
-              [(ngModel)]="restaurant.name" 
-              name="name"
-              class="form-control" 
-              placeholder="Enter restaurant name"
-              required
-            >
-          </div>
+        <!-- Form Card -->
+        <mat-card class="p-8 shadow-large">
+          <form (ngSubmit)="onSubmit()" class="space-y-8">
+            <!-- Basic Information -->
+            <div>
+              <h2 class="text-xl font-semibold text-gray-900 mb-6 flex items-center">
+                <mat-icon class="mr-2 text-primary-600">info</mat-icon>
+                Basic Information
+              </h2>
+              
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <mat-form-field appearance="outline" class="w-full">
+                  <mat-label>Restaurant Name *</mat-label>
+                  <input 
+                    matInput 
+                    [(ngModel)]="restaurant.name" 
+                    name="name"
+                    placeholder="Enter restaurant name"
+                    required>
+                  <mat-icon matSuffix class="text-gray-500">restaurant</mat-icon>
+                </mat-form-field>
 
-          <div class="form-group">
-            <label for="cuisine" class="form-label">Cuisine Type *</label>
-            <select 
-              id="cuisine"
-              [(ngModel)]="restaurant.cuisine" 
-              name="cuisine"
-              class="form-control" 
-              required
-            >
-              <option value="">Select cuisine type</option>
-              <option *ngFor="let cuisine of cuisines" [value]="cuisine">{{ cuisine }}</option>
-            </select>
-          </div>
+                <mat-form-field appearance="outline" class="w-full">
+                  <mat-label>Cuisine Type *</mat-label>
+                  <mat-select [(ngModel)]="restaurant.cuisine" name="cuisine" required>
+                    <mat-option value="">Select cuisine type</mat-option>
+                    <mat-option *ngFor="let cuisine of cuisines" [value]="cuisine">
+                      {{ cuisine }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-icon matSuffix class="text-gray-500">category</mat-icon>
+                </mat-form-field>
 
-          <div class="form-group">
-            <label for="address" class="form-label">Address *</label>
-            <input 
-              type="text" 
-              id="address"
-              [(ngModel)]="restaurant.address" 
-              name="address"
-              class="form-control" 
-              placeholder="Enter full address"
-              required
-            >
-          </div>
+                <mat-form-field appearance="outline" class="w-full">
+                  <mat-label>Address *</mat-label>
+                  <input 
+                    matInput 
+                    [(ngModel)]="restaurant.address" 
+                    name="address"
+                    placeholder="Enter full address"
+                    required>
+                  <mat-icon matSuffix class="text-gray-500">location_on</mat-icon>
+                </mat-form-field>
 
-          <div class="form-group">
-            <label for="phone" class="form-label">Phone Number</label>
-            <input 
-              type="tel" 
-              id="phone"
-              [(ngModel)]="restaurant.phone" 
-              name="phone"
-              class="form-control" 
-              placeholder="Enter phone number"
-            >
-          </div>
+                <mat-form-field appearance="outline" class="w-full">
+                  <mat-label>Phone Number</mat-label>
+                  <input 
+                    matInput 
+                    type="tel"
+                    [(ngModel)]="restaurant.phone" 
+                    name="phone"
+                    placeholder="Enter phone number">
+                  <mat-icon matSuffix class="text-gray-500">phone</mat-icon>
+                </mat-form-field>
 
-          <div class="form-group">
-            <label for="website" class="form-label">Website</label>
-            <input 
-              type="url" 
-              id="website"
-              [(ngModel)]="restaurant.website" 
-              name="website"
-              class="form-control" 
-              placeholder="Enter website URL"
-            >
-          </div>
+                <mat-form-field appearance="outline" class="w-full">
+                  <mat-label>Website</mat-label>
+                  <input 
+                    matInput 
+                    type="url"
+                    [(ngModel)]="restaurant.website" 
+                    name="website"
+                    placeholder="Enter website URL">
+                  <mat-icon matSuffix class="text-gray-500">language</mat-icon>
+                </mat-form-field>
 
-          <div class="form-group">
-            <label for="priceRange" class="form-label">Price Range *</label>
-            <select 
-              id="priceRange"
-              [(ngModel)]="restaurant.priceRange" 
-              name="priceRange"
-              class="form-control" 
-              required
-            >
-              <option value="">Select price range</option>
-              <option value="Budget">Budget ($)</option>
-              <option value="Moderate">Moderate ($$)</option>
-              <option value="Expensive">Expensive ($$$)</option>
-              <option value="Luxury">Luxury ($$$$)</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="features" class="form-label">Features</label>
-            <div class="features-grid">
-              <label class="feature-checkbox" *ngFor="let feature of availableFeatures">
-                <input 
-                  type="checkbox" 
-                  [value]="feature"
-                  (change)="toggleFeature(feature)"
-                  [checked]="restaurant.features?.includes(feature)"
-                >
-                {{ feature }}
-              </label>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="hours" class="form-label">Hours of Operation</label>
-            <div class="hours-grid">
-              <div class="hour-item" *ngFor="let day of days">
-                <label>{{ day }}</label>
-                <input 
-                  type="text" 
-                  [(ngModel)]="restaurant.hours![day]" 
-                  [name]="'hours-' + day"
-                  class="form-control" 
-                  placeholder="e.g., 9:00 AM - 10:00 PM"
-                >
+                <mat-form-field appearance="outline" class="w-full">
+                  <mat-label>Price Range *</mat-label>
+                  <mat-select [(ngModel)]="restaurant.priceRange" name="priceRange" required>
+                    <mat-option value="">Select price range</mat-option>
+                    <mat-option value="Budget">Budget ($)</mat-option>
+                    <mat-option value="Moderate">Moderate ($$)</mat-option>
+                    <mat-option value="Expensive">Expensive ($$$)</mat-option>
+                    <mat-option value="Luxury">Luxury ($$$$)</mat-option>
+                  </mat-select>
+                  <mat-icon matSuffix class="text-gray-500">attach_money</mat-icon>
+                </mat-form-field>
               </div>
             </div>
-          </div>
 
-          <div class="alert alert-error" *ngIf="errorMessage">
-            {{ errorMessage }}
-          </div>
+            <mat-divider></mat-divider>
 
-          <div class="alert alert-success" *ngIf="successMessage">
-            {{ successMessage }}
-          </div>
+            <!-- Features -->
+            <div>
+              <h2 class="text-xl font-semibold text-gray-900 mb-6 flex items-center">
+                <mat-icon class="mr-2 text-primary-600">star</mat-icon>
+                Features & Amenities
+              </h2>
+              
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <mat-checkbox 
+                  *ngFor="let feature of availableFeatures"
+                  [checked]="restaurant.features?.includes(feature)"
+                  (change)="toggleFeature(feature)"
+                  class="feature-checkbox">
+                  {{ feature }}
+                </mat-checkbox>
+              </div>
+              
+              <!-- Selected Features Display -->
+              <div *ngIf="restaurant.features?.length" class="mt-4">
+                <p class="text-sm font-medium text-gray-700 mb-2">Selected features:</p>
+                <div class="flex flex-wrap gap-2">
+                  <mat-chip *ngFor="let feature of restaurant.features" 
+                           class="text-xs bg-primary-100 text-primary-800">
+                    {{ feature }}
+                  </mat-chip>
+                </div>
+              </div>
+            </div>
 
-          <div class="form-actions">
-            <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancel</button>
-            <button type="submit" class="btn" [disabled]="loading">
-              <span *ngIf="loading" class="spinner-small"></span>
-              {{ loading ? 'Adding Restaurant...' : 'Add Restaurant' }}
-            </button>
-          </div>
-        </form>
+            <mat-divider></mat-divider>
+
+            <!-- Hours of Operation -->
+            <div>
+              <h2 class="text-xl font-semibold text-gray-900 mb-6 flex items-center">
+                <mat-icon class="mr-2 text-primary-600">schedule</mat-icon>
+                Hours of Operation
+              </h2>
+              
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <mat-form-field appearance="outline" class="w-full" *ngFor="let day of days">
+                  <mat-label>{{ day }}</mat-label>
+                  <input 
+                    matInput 
+                    [(ngModel)]="restaurant.hours![day]" 
+                    [name]="'hours-' + day"
+                    placeholder="e.g., 9:00 AM - 10:00 PM">
+                </mat-form-field>
+              </div>
+            </div>
+
+            <!-- Error Message -->
+            <div *ngIf="errorMessage" 
+                 class="bg-red-50 border border-red-200 rounded-lg p-4 flex items-start space-x-3">
+              <mat-icon class="text-red-500 mt-0.5">error</mat-icon>
+              <div>
+                <p class="text-red-800 font-medium">Form validation failed</p>
+                <p class="text-red-700 text-sm">{{ errorMessage }}</p>
+              </div>
+            </div>
+
+            <!-- Success Message -->
+            <div *ngIf="successMessage" 
+                 class="bg-green-50 border border-green-200 rounded-lg p-4 flex items-start space-x-3">
+              <mat-icon class="text-green-500 mt-0.5">check_circle</mat-icon>
+              <div>
+                <p class="text-green-800 font-medium">Success!</p>
+                <p class="text-green-700 text-sm">{{ successMessage }}</p>
+              </div>
+            </div>
+
+            <!-- Form Actions -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-end pt-6">
+              <button type="button" 
+                      mat-button 
+                      (click)="onCancel()"
+                      class="flex items-center gap-2">
+                <mat-icon>cancel</mat-icon>
+                Cancel
+              </button>
+              
+              <button type="submit" 
+                      mat-raised-button 
+                      color="primary" 
+                      class="flex items-center gap-2 px-8 py-3"
+                      [disabled]="loading || !isFormValid()">
+                <mat-spinner diameter="20" *ngIf="loading"></mat-spinner>
+                <mat-icon *ngIf="!loading">add_business</mat-icon>
+                {{ loading ? 'Adding Restaurant...' : 'Add Restaurant' }}
+              </button>
+            </div>
+          </form>
+        </mat-card>
       </div>
     </div>
   `,
-  styles: [`
-    .add-restaurant-container {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-
-    .add-restaurant-card {
-      padding: 40px;
-    }
-
-    .card-header {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-
-    .card-header h2 {
-      font-size: 2rem;
-      margin-bottom: 10px;
-      color: #333;
-    }
-
-    .card-header p {
-      color: #666;
-      font-size: 1rem;
-    }
-
-    .restaurant-form {
-      display: grid;
-      gap: 20px;
-    }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 10px;
-    }
-
-    .feature-checkbox {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px;
-      border: 1px solid #e9ecef;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background-color 0.2s ease;
-    }
-
-    .feature-checkbox:hover {
-      background-color: #f8f9fa;
-    }
-
-    .feature-checkbox input[type="checkbox"] {
-      margin: 0;
-    }
-
-    .hours-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 15px;
-    }
-
-    .hour-item {
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-    }
-
-    .hour-item label {
-      font-weight: 600;
-      color: #333;
-      font-size: 0.9rem;
-    }
-
-    .form-actions {
-      display: flex;
-      gap: 15px;
-      justify-content: flex-end;
-      margin-top: 20px;
-    }
-
-    .spinner-small {
-      display: inline-block;
-      width: 16px;
-      height: 16px;
-      border: 2px solid #ffffff;
-      border-top: 2px solid transparent;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-      margin-right: 8px;
-    }
-
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-    @media (max-width: 768px) {
-      .add-restaurant-card {
-        padding: 20px;
-      }
-
-      .card-header h2 {
-        font-size: 1.5rem;
-      }
-
-      .features-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hours-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .form-actions {
-        flex-direction: column;
-      }
-    }
-  `]
+  styles: []
 })
-export class AddRestaurantComponent {
+export class AddRestaurantComponent implements OnInit {
   restaurant: Partial<Restaurant> = {
     name: '',
     cuisine: '',
@@ -308,11 +268,28 @@ export class AddRestaurantComponent {
 
   constructor(
     private restaurantService: RestaurantService,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar,
+    private authService: AuthService
   ) {
     // Initialize hours object
     this.days.forEach(day => {
       this.restaurant.hours![day] = '';
+    });
+  }
+
+  ngOnInit(): void {
+    // Check if user is authenticated
+    this.authService.isAuthenticated().subscribe(isAuthenticated => {
+      if (!isAuthenticated) {
+        this.snackBar.open('Please log in to add a restaurant', 'Close', {
+          duration: 5000,
+          horizontalPosition: 'center',
+          verticalPosition: 'bottom',
+          panelClass: ['error-state']
+        });
+        this.router.navigate(['/login']);
+      }
     });
   }
 
@@ -342,6 +319,12 @@ export class AddRestaurantComponent {
       next: (restaurantId) => {
         this.loading = false;
         this.successMessage = 'Restaurant added successfully!';
+        this.snackBar.open('Restaurant added successfully!', 'Close', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'bottom',
+          panelClass: ['success-state']
+        });
         setTimeout(() => {
           this.router.navigate(['/restaurants']);
         }, 2000);
@@ -349,13 +332,25 @@ export class AddRestaurantComponent {
       error: (error) => {
         this.loading = false;
         this.errorMessage = 'Failed to add restaurant. Please try again.';
-        // Error adding restaurant
+        this.snackBar.open('Failed to add restaurant. Please try again.', 'Close', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'bottom',
+          panelClass: ['error-state']
+        });
       }
     });
   }
 
   onCancel(): void {
     this.router.navigate(['/restaurants']);
+  }
+
+  isFormValid(): boolean {
+    return !!(this.restaurant.name?.trim() && 
+              this.restaurant.cuisine && 
+              this.restaurant.address?.trim() && 
+              this.restaurant.priceRange);
   }
 
   private validateForm(): boolean {
@@ -379,6 +374,7 @@ export class AddRestaurantComponent {
       return false;
     }
 
+    this.errorMessage = '';
     return true;
   }
 } 

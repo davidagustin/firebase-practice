@@ -12,5 +12,7 @@ export const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'add-restaurant', component: AddRestaurantComponent },
   { path: 'restaurant/:id', component: RestaurantDetailComponent },
+  { path: 'profile', component: HomeComponent }, // TODO: Create ProfileComponent
+  { path: 'favorites', component: HomeComponent }, // TODO: Create FavoritesComponent
   { path: '**', redirectTo: '' }
 ];

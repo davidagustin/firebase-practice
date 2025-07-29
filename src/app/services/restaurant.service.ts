@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Firestore, collection, doc, getDocs, getDoc, addDoc, updateDoc, deleteDoc, query, where, orderBy, limit } from '@angular/fire/firestore';
-import { Observable, from, map } from 'rxjs';
+import { Observable, from, map, timeout, catchError, of } from 'rxjs';
 import { Restaurant, Review } from '../models/restaurant.model';
 
 @Injectable({
@@ -13,10 +13,15 @@ export class RestaurantService {
   getRestaurants(): Observable<Restaurant[]> {
     const restaurantsRef = collection(this.firestore, 'restaurants');
     return from(getDocs(restaurantsRef)).pipe(
+      timeout(10000), // 10 second timeout
       map(snapshot => snapshot.docs.map(doc => ({
         id: doc.id,
         ...doc.data()
-      } as Restaurant)))
+      } as Restaurant))),
+      catchError(error => {
+        console.error('Error fetching restaurants:', error);
+        return of([]); // Return empty array on error
+      })
     );
   }
 
@@ -80,10 +85,15 @@ export class RestaurantService {
       limit(limitCount)
     );
     return from(getDocs(q)).pipe(
+      timeout(10000), // 10 second timeout
       map(snapshot => snapshot.docs.map(doc => ({
         id: doc.id,
         ...doc.data()
-      } as Restaurant)))
+      } as Restaurant))),
+      catchError(error => {
+        console.error('Error fetching top rated restaurants:', error);
+        return of([]); // Return empty array on error
+      })
     );
   }
 

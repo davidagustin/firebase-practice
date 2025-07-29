@@ -1,74 +1,37 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-rating',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatIconModule, MatTooltipModule],
   template: `
-    <div class="rating-container">
-      <div class="stars">
-        <span 
+    <div class="flex items-center gap-2">
+      <div class="flex items-center">
+        <mat-icon 
           *ngFor="let star of stars; let i = index" 
-          class="star"
-          [class.filled]="i < rating"
-          [class.half]="i === Math.floor(rating) && rating % 1 !== 0"
+          class="cursor-pointer transition-colors duration-200"
+          [class.text-yellow-500]="i < (hoverRating || rating)"
+          [class.text-gray-300]="i >= (hoverRating || rating)"
+          [class.text-yellow-400]="i === Math.floor(rating) && rating % 1 !== 0 && !hoverRating"
+          [class.text-yellow-300]="i === Math.floor(rating) && rating % 1 !== 0 && !hoverRating"
           (click)="onStarClick(i + 1)"
           (mouseenter)="hoverRating = i + 1"
-          (mouseleave)="hoverRating = 0">
-          ★
-        </span>
+          (mouseleave)="hoverRating = 0"
+          [matTooltip]="readonly ? '' : 'Rate ' + (i + 1) + ' stars'"
+          [class.cursor-default]="readonly"
+          [class.cursor-pointer]="!readonly">
+          {{ getStarIcon(i) }}
+        </mat-icon>
       </div>
-      <span class="rating-text" *ngIf="showText">{{ rating }}/5</span>
+      <span class="text-sm text-gray-600 font-medium" *ngIf="showText">
+        {{ rating.toFixed(1) }}/5
+      </span>
     </div>
   `,
-  styles: [`
-    .rating-container {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .stars {
-      display: flex;
-      gap: 2px;
-    }
-
-    .star {
-      font-size: 20px;
-      cursor: pointer;
-      color: #ddd;
-      transition: color 0.2s ease;
-    }
-
-    .star.filled {
-      color: #ffd700;
-    }
-
-    .star.half {
-      color: #ffd700;
-      position: relative;
-    }
-
-    .star.half::after {
-      content: '★';
-      position: absolute;
-      left: 0;
-      top: 0;
-      color: #ddd;
-      clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
-    }
-
-    .star:hover {
-      color: #ffd700;
-    }
-
-    .rating-text {
-      font-size: 14px;
-      color: #666;
-      font-weight: 500;
-    }
-  `]
+  styles: []
 })
 export class RatingComponent {
   @Input() rating: number = 0;
@@ -84,6 +47,20 @@ export class RatingComponent {
     if (!this.readonly) {
       this.rating = starRating;
       this.ratingChange.emit(starRating);
+    }
+  }
+
+  getStarIcon(index: number): string {
+    if (this.hoverRating > 0) {
+      return index < this.hoverRating ? 'star' : 'star_border';
+    }
+    
+    if (index < Math.floor(this.rating)) {
+      return 'star';
+    } else if (index === Math.floor(this.rating) && this.rating % 1 !== 0) {
+      return 'star_half';
+    } else {
+      return 'star_border';
     }
   }
 } 
