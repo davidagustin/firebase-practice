@@ -37,13 +37,56 @@
   border-radius: 8px !important;
 }
 
-/* Remove all outline borders and vertical lines */
+/* Proper Material Design outline styling */
 .mat-mdc-form-field.mat-mdc-form-field-appearance-outline .mat-mdc-form-field-outline {
-  color: #e0e0e0 !important;
+  color: rgba(0, 0, 0, 0.12) !important;
 }
 
 .mat-mdc-form-field.mat-mdc-form-field-appearance-outline .mat-mdc-form-field-outline-thick {
   color: #3f51b5 !important;
+}
+
+/* Ensure all form fields have visible borders */
+.mat-mdc-form-field {
+  border: 1px solid #e0e0e0 !important;
+  border-radius: 4px !important;
+  background-color: white !important;
+  min-height: 36px !important;
+  display: flex !important;
+  align-items: center !important;
+  padding: 0 12px !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Focus states for all form fields */
+.mat-mdc-form-field.mat-focused {
+  border-color: #3f51b5 !important;
+  border-width: 1px !important;
+  box-shadow: 0 0 0 1px rgba(63, 81, 181, 0.1) !important;
+}
+
+/* Hover states for all form fields */
+.mat-mdc-form-field:hover {
+  border-color: #bdbdbd !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15) !important;
+}
+
+.mat-mdc-form-field.mat-mdc-form-field-appearance-outline.mat-focused .mat-mdc-form-field-outline-thick {
+  color: #3f51b5 !important;
+}
+
+.mat-mdc-form-field.mat-mdc-form-field-appearance-outline.mat-form-field-invalid .mat-mdc-form-field-outline-thick {
+  color: #f44336 !important;
+}
+
+/* Proper Material Design text field wrapper */
+.mat-mdc-form-field.mat-mdc-form-field-appearance-outline .mat-mdc-text-field-wrapper {
+  background-color: transparent !important;
+  border-radius: 4px !important;
+  display: flex !important;
+  align-items: center !important;
+  min-height: 36px !important;
+  border: none !important;
 }
 
 /* Ensure no internal borders create vertical lines */
@@ -54,6 +97,9 @@
   border-left: none !important;
   border-right: none !important;
   padding: 0 !important;
+  min-height: 36px !important;
+  display: flex !important;
+  align-items: center !important;
 }
 
 .mat-mdc-form-field .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex {
@@ -77,11 +123,22 @@
 }
 
 .mat-mdc-form-field .mat-mdc-form-field-label {
-  color: rgba(0, 0, 0, 0.6) !important;
+  color: #374151 !important;
+  font-weight: 500 !important;
+  top: 20px !important;
+  transform: translateY(-50%) !important;
+}
+
+.mat-mdc-form-field.mat-focused .mat-mdc-form-field-label,
+.mat-mdc-form-field.mat-form-field-should-float .mat-mdc-form-field-label {
+  top: 8px !important;
+  transform: translateY(0) !important;
+  font-size: 12px !important;
 }
 
 .mat-mdc-form-field .mat-mdc-input-element {
-  color: rgba(0, 0, 0, 0.87) !important;
+  color: #111827 !important;
+  font-weight: 400 !important;
 }
 
 /* Select dropdown styles */
@@ -99,7 +156,24 @@
 
 /* Input placeholder styles */
 .mat-mdc-form-field .mat-mdc-input-element::placeholder {
-  color: rgba(0, 0, 0, 0.38) !important;
+  color: rgba(0, 0, 0, 0.6) !important;
+  opacity: 1 !important;
+  font-size: 16px !important;
+}
+
+/* Ensure placeholders are visible when field is empty */
+.mat-mdc-form-field .mat-mdc-input-element:not(:focus):placeholder-shown {
+  color: rgba(0, 0, 0, 0.6) !important;
+  font-size: 16px !important;
+}
+
+/* Select placeholder styling */
+.mat-mdc-select .mat-mdc-select-value-text {
+  color: rgba(0, 0, 0, 0.6) !important;
+}
+
+.mat-mdc-select.mat-focused .mat-mdc-select-value-text {
+  color: rgba(0, 0, 0, 0.87) !important;
 }
 
 /* Focus states */
@@ -174,11 +248,98 @@
 .mat-mdc-form-field.mat-mdc-form-field-appearance-outline .mat-mdc-form-field-outline-gap {
   border: none !important;
   border-color: transparent !important;
+  border-width: 0 !important;
+  border-style: none !important;
+}
+
+/* Remove all outline components completely */
+.mat-mdc-form-field.mat-mdc-form-field-appearance-outline .mat-mdc-form-field-outline {
+  display: none !important;
+}
+
+.mat-mdc-form-field.mat-mdc-form-field-appearance-outline .mat-mdc-form-field-outline-thick {
+  display: none !important;
+}
+
+/* Target the specific notched outline elements */
+.mat-mdc-form-field .mdc-notched-outline {
+  display: none !important;
+}
+
+.mat-mdc-form-field .mat-mdc-notch-piece {
+  display: none !important;
+}
+
+.mat-mdc-form-field .mdc-notched-outline__leading,
+.mat-mdc-form-field .mdc-notched-outline__trailing,
+.mat-mdc-form-field .mdc-notched-outline__notch {
+  display: none !important;
+}
+
+/* Hide the floating label container */
+.mat-mdc-form-field .mdc-floating-label {
+  display: none !important;
+}
+
+/* Remove the form field flex that contains the outline */
+.mat-mdc-form-field .mat-mdc-form-field-flex {
+  display: flex !important;
+  align-items: center !important;
+  min-height: 44px !important;
+  padding: 0 12px !important;
+}
+
+/* Alternative approach - make outlines invisible */
+.mat-mdc-form-field.mat-mdc-form-field-appearance-outline .mat-mdc-form-field-outline-start,
+.mat-mdc-form-field.mat-mdc-form-field-appearance-outline .mat-mdc-form-field-outline-end,
+.mat-mdc-form-field.mat-mdc-form-field-appearance-outline .mat-mdc-form-field-outline-gap {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Proper Material Design label positioning */
+.mat-mdc-form-field .mat-mdc-form-field-label {
+  color: rgba(0, 0, 0, 0.6) !important;
+  font-size: 14px !important;
+}
+
+.mat-mdc-form-field.mat-focused .mat-mdc-form-field-label {
+  color: #3f51b5 !important;
+}
+
+/* Ensure labels don't interfere with placeholders */
+.mat-mdc-form-field:not(.mat-focused):not(.mat-form-field-should-float) .mat-mdc-form-field-label {
+  display: none !important;
+}
+
+/* Show placeholders when labels are hidden */
+.mat-mdc-form-field:not(.mat-focused):not(.mat-form-field-should-float) .mat-mdc-input-element::placeholder {
+  opacity: 1 !important;
+  color: rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Ensure the select value is properly positioned */
+.mat-mdc-select-value {
+  padding: 0 !important;
+  margin: 0 !important;
+  line-height: 1.5 !important;
+}
+
+.mat-mdc-select-value-text {
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
 .mat-mdc-form-field .mat-mdc-form-field-infix {
   border: none !important;
-  padding: 0 !important;
+  padding: 16px 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  min-height: 24px !important;
 }
 
 .mat-mdc-form-field .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex {
@@ -187,16 +348,66 @@
 
 .mat-mdc-form-field .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-infix {
   border: none !important;
-  padding: 0 !important;
+  padding: 16px 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  min-height: 24px !important;
 }
 
 /* Remove any internal dividers or separators */
 .mat-mdc-form-field .mat-mdc-form-field-subscript-wrapper {
   border: none !important;
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 .mat-mdc-form-field .mat-mdc-form-field-hint-wrapper {
   border: none !important;
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Proper Material Design outline elements */
+.mat-mdc-form-field .mdc-notched-outline__leading,
+.mat-mdc-form-field .mdc-notched-outline__trailing,
+.mat-mdc-form-field .mdc-notched-outline__notch {
+  border-color: rgba(0, 0, 0, 0.12) !important;
+}
+
+/* Proper Material Design input styling */
+.mat-mdc-form-field input.mat-mdc-input-element {
+  outline: none !important;
+  padding: 8px 0 !important;
+  margin: 0 !important;
+  line-height: 1.4 !important;
+  font-size: 16px !important;
+  height: 24px !important;
+  min-height: 24px !important;
+  border: none !important;
+  background: transparent !important;
+  vertical-align: middle !important;
+}
+
+/* Center the input text properly */
+.mat-mdc-form-field .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex {
+  align-items: center !important;
+  min-height: 56px !important;
+  display: flex !important;
+  padding: 0 16px !important;
+}
+
+/* Ensure proper spacing for select elements */
+.mat-mdc-form-field .mat-mdc-select {
+  padding: 0 !important;
+  margin: 0 !important;
+  line-height: 1.5 !important;
+  vertical-align: middle !important;
 }
 
 /* Chip styling overrides */
@@ -280,6 +491,46 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Compact form field styles */
+.mat-mdc-form-field {
+  margin-bottom: 4px !important;
+}
+
+/* Remove subscript spacing completely */
+.mat-mdc-form-field .mat-mdc-form-field-subscript-wrapper {
+  display: none !important;
+}
+
+.mat-mdc-form-field .mat-mdc-form-field-hint-wrapper {
+  display: none !important;
+}
+
+.mat-mdc-form-field .mat-mdc-form-field-error-wrapper {
+  display: none !important;
+}
+
+.mat-mdc-form-field .mat-mdc-form-field-label {
+  font-size: 13px !important;
+  top: 18px !important;
+}
+
+.mat-mdc-form-field.mat-focused .mat-mdc-form-field-label,
+.mat-mdc-form-field.mat-form-field-should-float .mat-mdc-form-field-label {
+  top: 6px !important;
+  font-size: 11px !important;
+}
+
+/* Reduce spacing in form field wrapper */
+.mat-mdc-form-field .mat-mdc-text-field-wrapper {
+  padding: 2px 12px !important;
+}
+
+/* Make select dropdowns more compact */
+.mat-mdc-select {
+  font-size: 16px !important;
+  line-height: 1.3 !important;
+}
 
 /* Global styles */
 html, body { 
@@ -440,6 +691,21 @@ html, body {
   .mat-mdc-form-field {
     font-size: 16px; /* Prevents zoom on iOS */
   }
+  
+  /* Mobile menu improvements */
+  .mat-mdc-menu-panel {
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  }
+  
+  .mat-mdc-menu-item {
+    font-size: 16px;
+    font-weight: 500;
+  }
+  
+  .mat-mdc-menu-item:hover {
+    background-color: rgba(33, 150, 243, 0.08);
+  }
 }
 
 @media (min-width: 641px) {
@@ -464,6 +730,22 @@ html, body {
   
   .mat-mdc-button, .mat-mdc-raised-button {
     padding: 0.75rem 1rem;
+  }
+  
+  /* Header responsive improvements */
+  .mat-mdc-toolbar {
+    min-height: 64px;
+  }
+  
+  .mat-mdc-toolbar-row {
+    padding: 0 8px;
+  }
+}
+
+/* Medium screen adjustments */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .mat-mdc-toolbar-row {
+    padding: 0 16px;
   }
 }
 

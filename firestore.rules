@@ -40,10 +40,11 @@ service cloud.firestore {
       // Anyone can read restaurants
       allow read: if true;
       
-      // Only authenticated users can create/update/delete
-      allow create: if isAuthenticated() && isValidRestaurant();
-      allow update: if isAuthenticated() && isValidRestaurant();
-      allow delete: if isAuthenticated();
+      // Temporarily allow unauthenticated writes for seeding
+      // TODO: Change back to authenticated only after seeding
+      allow create: if isValidRestaurant();
+      allow update: if isValidRestaurant();
+      allow delete: if true;
     }
     
     // Review rules

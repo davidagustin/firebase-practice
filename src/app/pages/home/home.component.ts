@@ -309,9 +309,9 @@ export class HomeComponent implements OnInit {
     { name: 'Italian', icon: 'restaurant', description: 'Pizza, pasta, and more' },
     { name: 'Asian', icon: 'ramen_dining', description: 'Sushi, noodles, and stir-fry' },
     { name: 'American', icon: 'fastfood', description: 'Burgers, BBQ, and comfort food' },
-    { name: 'Mexican', icon: 'taco', description: 'Tacos, burritos, and authentic flavors' },
+    { name: 'Mexican', icon: 'local_dining', description: 'Tacos, burritos, and authentic flavors' },
     { name: 'French', icon: 'wine_bar', description: 'Fine dining and classic cuisine' },
-    { name: 'Indian', icon: 'spice', description: 'Curries, naan, and aromatic spices' }
+    { name: 'Indian', icon: 'local_cafe', description: 'Curries, naan, and aromatic spices' }
   ];
 
   constructor() {}

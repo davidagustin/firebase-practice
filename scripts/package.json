@@ -7,9 +7,15 @@
     "seed": "node seed-data.js"
   },
   "dependencies": {
-    "firebase": "^10.7.0"
+    "firebase": "^10.7.0",
+    "firebase-admin": "^13.4.0"
   },
-  "keywords": ["firebase", "firestore", "seed", "data"],
+  "keywords": [
+    "firebase",
+    "firestore",
+    "seed",
+    "data"
+  ],
   "author": "",
   "license": "MIT"
-} 
+}

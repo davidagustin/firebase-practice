@@ -49,26 +49,54 @@ import { map, shareReplay } from 'rxjs/operators';
       <!-- Responsive Header -->
       <mat-toolbar class="bg-white border-b border-gray-200">
         <div class="flex justify-between items-center w-full px-2 sm:px-4">
+          <!-- Logo -->
           <div class="flex items-center space-x-2 sm:space-x-3">
             <button mat-button routerLink="/" class="flex items-center space-x-2 text-gray-800 hover:text-primary-700 transition-colors">
               <mat-icon class="text-primary-600 text-lg sm:text-xl">restaurant</mat-icon>
               <span class="text-lg sm:text-xl font-semibold">FoodRater</span>
             </button>
           </div>
-          <div class="flex items-center space-x-1 sm:space-x-2">
-            <!-- Navigation buttons -->
-            <button mat-button routerLink="/" class="hidden sm:flex items-center">
+          
+          <!-- Desktop Navigation -->
+          <div class="hidden md:flex items-center space-x-2">
+            <button mat-button routerLink="/" class="flex items-center">
               <mat-icon class="mr-1">home</mat-icon>
               Home
             </button>
-            <button mat-button routerLink="/restaurants" class="hidden sm:flex items-center">
+            <button mat-button routerLink="/restaurants" class="flex items-center">
               <mat-icon class="mr-1">restaurant_menu</mat-icon>
               Restaurants
             </button>
             
             <!-- Auth buttons -->
-            <button mat-button routerLink="/login" class="hidden sm:flex">Login</button>
-            <button mat-raised-button color="primary" routerLink="/signup" class="text-sm sm:text-base px-2 sm:px-4">Sign Up</button>
+            <button mat-button routerLink="/login">Login</button>
+            <button mat-raised-button color="primary" routerLink="/signup" class="px-4">Sign Up</button>
+          </div>
+          
+          <!-- Mobile Menu Button -->
+          <div class="md:hidden">
+            <button mat-icon-button [matMenuTriggerFor]="mobileMenu" class="text-gray-600">
+              <mat-icon>menu</mat-icon>
+            </button>
+            <mat-menu #mobileMenu="matMenu" class="mobile-menu">
+              <button mat-menu-item routerLink="/" class="flex items-center">
+                <mat-icon class="mr-3">home</mat-icon>
+                Home
+              </button>
+              <button mat-menu-item routerLink="/restaurants" class="flex items-center">
+                <mat-icon class="mr-3">restaurant_menu</mat-icon>
+                Restaurants
+              </button>
+              <mat-divider></mat-divider>
+              <button mat-menu-item routerLink="/login" class="flex items-center">
+                <mat-icon class="mr-3">login</mat-icon>
+                Login
+              </button>
+              <button mat-menu-item routerLink="/signup" class="flex items-center">
+                <mat-icon class="mr-3">person_add</mat-icon>
+                Sign Up
+              </button>
+            </mat-menu>
           </div>
         </div>
       </mat-toolbar>
@@ -80,7 +108,7 @@ import { map, shareReplay } from 'rxjs/operators';
           <p class="text-base sm:text-lg text-gray-600 mb-6 sm:mb-8 text-center sm:text-left">Find and rate the best restaurants in your area.</p>
           
           <!-- Responsive Navigation Grid -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
             <mat-card class="cursor-pointer hover:shadow-lg transition-shadow duration-300" routerLink="/restaurants">
               <mat-card-content class="p-4 sm:p-6 text-center">
                 <mat-icon class="text-3xl sm:text-4xl text-primary-600 mb-3 sm:mb-4">restaurant_menu</mat-icon>
@@ -97,7 +125,15 @@ import { map, shareReplay } from 'rxjs/operators';
               </mat-card-content>
             </mat-card>
             
-            <mat-card class="cursor-pointer hover:shadow-lg transition-shadow duration-300 sm:col-span-2 lg:col-span-1" routerLink="/restaurants">
+            <mat-card class="cursor-pointer hover:shadow-lg transition-shadow duration-300" routerLink="/bulk-add-restaurants">
+              <mat-card-content class="p-4 sm:p-6 text-center">
+                <mat-icon class="text-3xl sm:text-4xl text-primary-600 mb-3 sm:mb-4">library_add</mat-icon>
+                <h3 class="text-lg sm:text-xl font-semibold mb-2">Bulk Add</h3>
+                <p class="text-sm sm:text-base text-gray-600">Add 100 sample restaurants</p>
+              </mat-card-content>
+            </mat-card>
+            
+            <mat-card class="cursor-pointer hover:shadow-lg transition-shadow duration-300" routerLink="/restaurants">
               <mat-card-content class="p-4 sm:p-6 text-center">
                 <mat-icon class="text-3xl sm:text-4xl text-primary-600 mb-3 sm:mb-4">rate_review</mat-icon>
                 <h3 class="text-lg sm:text-xl font-semibold mb-2">Rate & Review</h3>
@@ -112,7 +148,20 @@ import { map, shareReplay } from 'rxjs/operators';
       </main>
     </div>
   `,
-  styles: []
+  styles: [`
+    .mobile-menu {
+      min-width: 200px;
+    }
+    
+    .mobile-menu .mat-mdc-menu-item {
+      height: 48px;
+      padding: 0 16px;
+    }
+    
+    .mobile-menu .mat-mdc-menu-item mat-icon {
+      margin-right: 12px;
+    }
+  `]
 })
 export class AppComponent {
   authService = inject(AuthService);
