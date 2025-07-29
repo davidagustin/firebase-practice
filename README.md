@@ -2,7 +2,7 @@
 
 A modern, responsive restaurant rating application built with Angular 17 and Firebase, inspired by Yelp. Users can discover restaurants, read reviews, and share their dining experiences with a beautiful, intuitive interface.
 
-🌐 **Live Demo**: [https://fir-practice-54eb3.web.app/](https://fir-practice-54eb3.web.app/)
+🌐 **Live Demo**: [https://firebase-practice--fir-practice-54eb3.us-central1.hosted.app/](https://firebase-practice--fir-practice-54eb3.us-central1.hosted.app/)
 
 ![Angular](https://img.shields.io/badge/Angular-17-red?style=for-the-badge&logo=angular)
 ![Firebase](https://img.shields.io/badge/Firebase-Cloud-orange?style=for-the-badge&logo=firebase)
