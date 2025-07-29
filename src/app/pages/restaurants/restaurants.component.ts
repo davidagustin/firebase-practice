@@ -432,6 +432,6 @@ export class RestaurantsComponent implements OnInit, OnDestroy {
 
   addToFavorites(restaurant: Restaurant): void {
     // Implement favorites functionality
-    console.log('Added to favorites:', restaurant.name);
+    // Restaurant added to favorites
   }
 } 

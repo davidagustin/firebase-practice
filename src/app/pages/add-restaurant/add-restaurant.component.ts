@@ -349,7 +349,7 @@ export class AddRestaurantComponent {
       error: (error) => {
         this.loading = false;
         this.errorMessage = 'Failed to add restaurant. Please try again.';
-        console.error('Error adding restaurant:', error);
+        // Error adding restaurant
       }
     });
   }
